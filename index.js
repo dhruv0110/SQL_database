@@ -18,14 +18,14 @@ const connection = mysql.createConnection({
     password : 'Momdad2112001',
 });
 
-let getRandomUser = ()=> {
-  return [
-  faker.string.uuid(),
-  faker.internet.userName(),
-  faker.internet.email(),
-  faker.internet.password(),
-  ];
-};
+// let getRandomUser = ()=> {
+//   return [
+//   faker.string.uuid(),
+//   faker.internet.userName(),
+//   faker.internet.email(),
+//   faker.internet.password(),
+//   ];
+// };
 
 app.get("/",(req,res)=>{
   let q = "select count(*) from user";

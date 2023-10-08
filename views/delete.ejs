@@ -1,15 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete user</title>
 </head>
+<style>
+    /* Basic styling for better visualization */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #dfd8a7;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        margin-left: 20px;
+        line-height: 40px;
+    }
+
+    form {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .name {
+        text-decoration: underline;
+    }
+
+    textarea,
+    input[name="password"] {
+        width: 93%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: none;
+        background-color: #FFCF96;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #FF8080;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 12px 20px;
+        cursor: pointer;
+        width: 100%;
+
+    }
+
+    @media(max-width:932px) {
+        body {
+            flex-wrap: wrap;
+        }
+    }
+
+    @media(max-width:480px) {
+        h2 {
+            margin-top: 50px;
+            font-size: 20px;
+        }
+
+        form {
+            margin-bottom: 200px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 80%;
+        }
+    }
+</style>
+
 <body>
-    <h3>To delete this user : <%= user.EMAIL%>, enter the password</h3>
+    <h2>To delete this user : <span class="name">
+            <%= user.EMAIL%><br>
+        </span> enter the password:</h2>
     <form method="post" action="/user/<%=user.ID%>?_method=DELETE">
         <input placeholder="Enter password to delete" name="password">
         <button>Delete</button>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+        integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            let tl = gsap.timeline();
+            tl.from("h2",{
+                x:-500,
+                duration:0.5,
+                opacity:0
+            })
+            tl.from("form",{
+                scale:0.5,
+                duration:0.5,
+                opacity:0,
+            })
+        </script>
 </body>
+
 </html>

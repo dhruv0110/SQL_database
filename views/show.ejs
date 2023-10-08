@@ -1,39 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Users</title>
     <style>
-        table,tr,td{
-            border: 1px solid black;
+        h1{
+            text-decoration: underline;
+            color: #BCA37F;
+        }
+        .table-container {
+            display: table;
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        body {
+            background-color: #FFF2D8;
+        }
+
+        .table-row {
+            display: table-row;
+            background-color: #FFCF96;
+        }
+
+        .table-cell {
+            display: table-cell;
+            border: 1px solid rgb(135, 124, 109);
+            padding: 5px;
+        }
+
+        .table-headers {
+            background-color: #FF8080;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 30px;
+        }
+
+        .action-buttons button {
+            background-color: #F6FDC3;
+            border-radius: 5px;
+            border: none;
+            color: #704040;
+            height: 40px;
+        }
+
+        .action-buttons button:hover {
+            background-color: #edf6a6;
+        }
+
+        .newUser {
+            background-color: #9bdea7;
+            border-radius: 5px;
+            border: none;
+            color: #704040;
+            height: 40px;
+        }
+
+        .newUser:hover {
+            background-color: #73c580;
         }
     </style>
 </head>
+
 <body>
-    <table>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Username</th>
-            </tr>
-            <% for(user of users) { %>
-            <tr>
-                <td><%= user.ID %></td>
-                <td><%= user.EMAIL %></td>
-                <td><%= user.USERNAME %></td>
-                <td> <form method="GET" action="/user/<%=user.ID%>/edit">
-                    <button>Edit username</button>
-                </form></td>
-                <td>
-                    <form method="get" action="/user/<%=user.ID%>/delete">
-                        <button>Delete Data</button>
-                </td>
-            </tr>
+    <h1>All information of User</h1>
+    <div class="table-container">
+        <div class="table-row">
+            <div class="table-cell table-headers">Id</div>
+            <div class="table-cell table-headers">Email</div>
+            <div class="table-cell table-headers">Username</div>
+            <div class="table-cell table-headers">Actions</div>
+        </div>
+        <% for(user of users) { %>
+            <div class="table-row" data-scroll-section>
+                <div class="table-cell" >
+                    <%= user.ID %>
+                </div>
+                <div class="table-cell">
+                    <%= user.EMAIL %>
+                </div>
+                <div class="table-cell">
+                    <%= user.USERNAME %>
+                </div>
+                <div class="table-cell">
+                    <div class="action-buttons">
+                        <form method="GET" action="/user/<%=user.ID%>/edit">
+                            <button>Edit username</button>
+                        </form>
+                        <form method="get" action="/user/<%=user.ID%>/delete">
+                            <button>Delete Data</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <% } %>
-    </table><br>
+    </div><br>
     <form action="/user/new" method="GET">
-        <button>Add new user</button>
+        <button class="newUser">Add new user</button>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+        integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script>
+        const scroll = new LocomotiveScroll({
+            el: document.querySelector('.main'),
+            smooth: true
+        });
+        let tl = gsap.timeline()
+        tl.from("h1",{
+            y:-100,
+            duration:0.5,
+            delay:0.5,
+            opacity:0
+        });
+        tl.from(".table-container",{
+            scale:1.5,
+            duration:0.5,
+            delay:0.5,
+            opacity:0
+        });
+        tl.from(".action-buttons",{
+            scale:0.9,
+            duration:0.8,
+            stagger:0.1
+        });
+        tl.from(".newUser",{
+            y:10,
+            duration:0.5,
+            opacity:0,
+        })
+    </script>
 </body>
+
 </html>
