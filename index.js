@@ -1,4 +1,3 @@
-const { faker } = require('@faker-js/faker');
 const mysql = require("mysql2");
 const express = require("express");
 const app = express();
@@ -17,15 +16,6 @@ const connection = mysql.createConnection({
     database : 'delta_app',
     password : 'Momdad2112001',
 });
-
-// let getRandomUser = ()=> {
-//   return [
-//   faker.string.uuid(),
-//   faker.internet.userName(),
-//   faker.internet.email(),
-//   faker.internet.password(),
-//   ];
-// };
 
 app.get("/",(req,res)=>{
   let q = "select count(*) from user";
